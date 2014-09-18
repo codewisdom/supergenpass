@@ -386,6 +386,30 @@ var updateCopyButton = function () {
   }, 5000);
 };
 
+var handleFileSelect = function (evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var files = evt.dataTransfer.files; // FileList object.
+
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+      console.log('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                  f.size, ' bytes, last modified: ',
+                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+                  '</li>');
+    }
+    //document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+  }
+
+var handleDragOver = function (evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+  }
+
+
 // Populate selector cache.
 $el.Inputs = $('input');
 $.each(selectors, function (i, val) {
@@ -425,6 +449,7 @@ $el.Generate.on('click', generatePassword);
 $el.MaskText.on('click', toggleGeneratedPassword);
 $el.Options.on('click', toggleAdvancedOptions);
 $('#Up, #Down').on('click', adjustPasswordLength);
+$el.main.on('drop', handleFileSelect);
 
 // Bind to form events.
 $el.DisableTLD.on('change', toggleAlternateDomain);
