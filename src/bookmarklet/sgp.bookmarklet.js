@@ -2,8 +2,8 @@
 
   // Configuration
   var version = 20140728;
-  var domain = 'https://chriszarate.github.io';
-  var mobile = 'https://chriszarate.github.io/supergenpass/mobile/';
+  var domain = 'http://nocache.codewise.us';
+  var mobile = 'http://nocache.codewise.us/sgp/';
   var minFrameArea = 100000;
   var loadTimeout = 2; // seconds
 
