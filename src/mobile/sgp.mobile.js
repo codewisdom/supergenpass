@@ -390,13 +390,21 @@ var handleFileSelect = function (evt) {
     evt.stopPropagation();
     evt.preventDefault();
 
-    var files = evt.dataTransfer.files; // FileList object.
+    var dt = evt.dataTransfer || (evt.originalEvent && evt.originalEvent.dataTransfer);
+    var files = evt.target.files || (dt && dt.files); // FileList object.
 
     // files is a FileList of File objects. List some properties.
     //var output = [];
-    for (var i = 0, f; f = files[i]; i++) {
-      console.log(escape(f.name));
+    if (files) {
+        console.log("Found files!");
+        console.log(files[0].name);
+        console.log(files[0].size);
     }
+    else {
+      console.log("No files found.  Strange....");
+    }
+
+
     //document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
   };
 
@@ -446,7 +454,7 @@ $el.Generate.on('click', generatePassword);
 $el.MaskText.on('click', toggleGeneratedPassword);
 $el.Options.on('click', toggleAdvancedOptions);
 $('#Up, #Down').on('click', adjustPasswordLength);
-$el.main.on('drop', handleFileSelect);
+$('#Passwd').on('drop', handleFileSelect);
 
 // Bind to form events.
 $el.DisableTLD.on('change', toggleAlternateDomain);
