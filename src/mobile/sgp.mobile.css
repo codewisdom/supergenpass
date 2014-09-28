@@ -161,6 +161,10 @@ label.placeholder {
    padding-right: 30px;
 }
 
+#Passwd.hover {
+   border: 10px dashed #333;
+}
+
 #PasswdField, #DomainField {
    clear: both;
 }

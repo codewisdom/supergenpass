@@ -387,8 +387,21 @@ var updateCopyButton = function () {
 };
 
 var handleFileSelect = function (evt) {
+    
     evt.stopPropagation();
     evt.preventDefault();
+
+    var rdr = new FileReader();
+
+    rdr.onload = function () {
+        //Write binary of file
+        console.log("Binary of file: ");
+        console.log(rdr.result);
+        //Hash the binary file
+        var output = md5(rdr.result).toString();
+        console.log("MD5: ");
+        console.log(output);
+    };
 
     var dt = evt.dataTransfer || (evt.originalEvent && evt.originalEvent.dataTransfer);
     var files = evt.target.files || (dt && dt.files); // FileList object.
@@ -399,21 +412,20 @@ var handleFileSelect = function (evt) {
         console.log("Found files!");
         console.log(files[0].name);
         console.log(files[0].size);
+        rdr.readAsBinaryString(files[0]);
     }
     else {
       console.log("No files found.  Strange....");
     }
 
-
     //document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
   };
 
-var handleDragOver = function (evt) {
-    evt.stopPropagation();
-    evt.preventDefault();
-    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
-  };
-
+//var handleDragOver = function (evt) {
+//    evt.stopPropagation();
+//    evt.preventDefault();
+//    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+//  };
 
 // Populate selector cache.
 $el.Inputs = $('input');
