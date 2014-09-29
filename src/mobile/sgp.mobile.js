@@ -10,6 +10,7 @@ var flashversion = require('./lib/flashversion');
 var identicon = require('./lib/identicon5');
 var shortcut = require('./lib/shortcut');
 var storage = require('./lib/localstorage-polyfill');
+var spark = require('./lib/spark-md5');
 
 // Set default values.
 var messageOrigin = false;
@@ -395,10 +396,10 @@ var handleFileSelect = function (evt) {
 
     rdr.onload = function () {
         //Write binary of file
-        console.log("Binary of file: ");
-        console.log(rdr.result);
+        //console.log("Binary of file: ");
+        //console.log(rdr.result);
         //Hash the binary file
-        var output = md5(rdr.result).toString();
+        var output = spark.hash(rdr.result).toString();
         console.log("MD5: ");
         console.log(output);
     };
