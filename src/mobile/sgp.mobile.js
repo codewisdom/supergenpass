@@ -402,7 +402,8 @@ var handleFileSelect = function (evt) {
         var output = spark.hash(rdr.result).toString();
         console.log("MD5: ");
         console.log(output);
-        $('#Passwd').val(output);
+        $('#FileSizeError').hide();
+        $(this).val(output);
     };
 
     var dt = evt.dataTransfer || (evt.originalEvent && evt.originalEvent.dataTransfer);
@@ -416,9 +417,13 @@ var handleFileSelect = function (evt) {
         console.log(files[0].size);
         if(files[0].size <= 2000000)
         {
-          rdr.readAsBinaryString(files[0]);
+          //Call readAsBinaryString under the context of the current text field
+          rdr.readAsBinaryString.call(this, (files[0]));
+
         } else {
-          $('#Passwd').val('2 MB max file size');
+
+          $('#FileSizeError').show();
+
         }
     } else {
       console.log("No files found.  Strange....");
@@ -472,7 +477,7 @@ $el.Generate.on('click', generatePassword);
 $el.MaskText.on('click', toggleGeneratedPassword);
 $el.Options.on('click', toggleAdvancedOptions);
 $('#Up, #Down').on('click', adjustPasswordLength);
-$('#Passwd').on('drop', handleFileSelect);
+$('#Passwd, #Secret').on('drop', handleFileSelect);
 
 // Bind to form events.
 $el.DisableTLD.on('change', toggleAlternateDomain);
