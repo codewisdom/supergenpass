@@ -403,7 +403,7 @@ var handleFileSelect = function (evt) {
         console.log("MD5: ");
         console.log(output);
         $('#FileSizeError').hide();
-        $(this).val(output);
+        $(evt.target).val(output);
     };
 
     var dt = evt.dataTransfer || (evt.originalEvent && evt.originalEvent.dataTransfer);
@@ -417,8 +417,9 @@ var handleFileSelect = function (evt) {
         console.log(files[0].size);
         if(files[0].size <= 2000000)
         {
+          //TODO: Log out what this is under this context.
           //Call readAsBinaryString under the context of the current text field
-          rdr.readAsBinaryString.call(this, (files[0]));
+          rdr.readAsBinaryString(files[0]);
 
         } else {
 
