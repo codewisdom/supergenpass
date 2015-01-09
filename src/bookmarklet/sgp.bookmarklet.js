@@ -1,9 +1,9 @@
-(function ($) {
+void function ($) {
 
   // Configuration
-  var version = 20140728;
-  var domain = 'http://nocache.codewise.us';
-  var mobile = 'http://nocache.codewise.us/sgp/';
+  var version = 20141223;
+  var domain = 'https://chriszarate.github.io';
+  var mobile = 'https://chriszarate.github.io/supergenpass/mobile/';
   var minFrameArea = 100000;
   var loadTimeout = 2; // seconds
 
@@ -230,4 +230,4 @@
 
   }
 
-})(window.jQuery);
+}(window.jQuery);
